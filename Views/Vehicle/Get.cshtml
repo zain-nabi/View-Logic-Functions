@@ -1,0 +1,52 @@
+﻿@model View_Logic_Functions.Models.NewVehicle
+@{
+    ViewData["Title"] = "Get";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Get</h1>
+
+@functions{
+    public void RenderHTML(string category, string dateTime, List<Vehicle> vehicleViewModel)
+    {
+        <div class="row mb-5">
+            @foreach (var item in vehicleViewModel)
+            {
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title"><h3>@category</h3>@dateTime</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Make</th>
+                                            <th>Model</th>
+                                            <th>Color</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr>
+                                                <td>@item.Make</td>
+                                                <td>@item.Model</td>
+                                                <td>@item.Color</td>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}
+
+<main id="content" role="main" class="main">
+    <div class="content container-fluid">
+        @{ RenderHTML("Vehicles", DateTime.Now.ToString("dd MMMM yyyy"), Model.Get());}
+        @{ RenderHTML("Trucks", DateTime.Now.ToString("dd MMMM yyyy"), Model.GetTrucks());}
+    </div>
+</main>
